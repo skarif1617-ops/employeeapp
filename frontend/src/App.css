@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap");
+
+:root {
+  --paper: #eef1f6;
+  --surface: #ffffff;
+  --ink: #17233b;
+  --ink-soft: #5b6784;
+  --line: #dde2ec;
+  --brand: #1f3a6b;
+  --brand-dark: #152a50;
+  --marigold: #f5b335;
+  --marigold-wash: #fff6df;
+  --ok: #17694a;
+  --danger: #b3261e;
+  --radius: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.5;
+}
+
+/* ---------- Page layout: form on the left, records on the right ---------- */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 28px 24px 48px;
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+h1 {
+  grid-column: 1 / -1;
+  margin: 0 0 4px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--brand-dark);
+  text-align: left;
+}
+
+h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 22px;
+  margin: 0;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(23, 35, 59, 0.05);
+}
+
+/* ---------- Form ---------- */
+form.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: sticky;
+  top: 20px;
+}
+
+form.card h2 {
+  margin-bottom: 2px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+input,
+select {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f9fafc;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--brand);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(31, 58, 107, 0.18);
+}
+
+button {
+  padding: 11px 16px;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.05s;
+}
+
+button:hover {
+  background: var(--brand-dark);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 2px;
+}
+
+.message {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #e8f5ee;
+  color: var(--ok);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---------- Records table ---------- */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  background: #f3f5fa;
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 2px solid var(--line);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover td {
+  background: #f7f9fd;
+}
+
+/* Number columns (Basic, Days, PF, HRA, DA, Total, Bus Fees) line up on the right */
+th:nth-child(4), td:nth-child(4),
+th:nth-child(6), td:nth-child(6),
+th:nth-child(7), td:nth-child(7),
+th:nth-child(8), td:nth-child(8),
+th:nth-child(9), td:nth-child(9),
+th:nth-child(10), td:nth-child(10),
+th:nth-child(11), td:nth-child(11) {
+  text-align: right;
+}
+
+/* Total Salary is the number people look for, so it gets the highlight */
+th:nth-child(10) {
+  background: var(--marigold);
+  color: var(--brand-dark);
+}
+
+td:nth-child(10) {
+  background: var(--marigold-wash);
+  font-size: 15px;
+}
+
+tbody tr:hover td:nth-child(10) {
+  background: #ffefc4;
+}
+
+.empty {
+  padding: 36px 14px;
+  text-align: center !important;
+  color: var(--ink-soft);
+}
+
+button.delete {
+  padding: 5px 12px;
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid #f0c7c4;
+  font-size: 13px;
+}
+
+button.delete:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+
+/* ---------- Smaller screens ---------- */
+@media (max-width: 960px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 20px 14px 40px;
+  }
+
+  form.card {
+    position: static;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
